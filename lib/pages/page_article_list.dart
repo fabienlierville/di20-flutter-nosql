@@ -58,8 +58,18 @@ class _PageArticleListState extends State<PageArticleList> {
                             child: (art.image == null)
                                 ?Image.asset("assets/img/no_image.png")
                                 :Image.file(File(art.image!))
-                        )
+                        ),
                         // Prix + Delete
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text("${art.prix}€"),
+                            IconButton(
+                              onPressed: null,
+                              icon: Icon(Icons.delete),
+                            ),
+                          ],
+                        )
                       ],
                     ),
                   );
