@@ -25,4 +25,11 @@ class ArticleManager{
     return 0;
   }
 
+  static bool remove(Article art){
+    if(GlobalVars.store != null){
+       return GlobalVars.store!.box<Article>().remove(art.id);
+    }
+    return false;
+  }
+
 }

@@ -65,7 +65,9 @@ class _PageArticleListState extends State<PageArticleList> {
                           children: [
                             Text("${art.prix}€"),
                             IconButton(
-                              onPressed: null,
+                              onPressed: (){
+                                ArticleManager.remove(art);
+                              },
                               icon: Icon(Icons.delete),
                             ),
                           ],
