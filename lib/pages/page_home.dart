@@ -11,6 +11,14 @@ class PageHome extends StatefulWidget {
 }
 
 class _PageHomeState extends State<PageHome> {
+  List<Magasin> magasins = [];
+
+  @override
+  void initState() {
+    getAllMagasins();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,6 +37,9 @@ class _PageHomeState extends State<PageHome> {
     );
   }
 
+  ///
+  /// Ajouter / Modifier un magasin
+  ///
   Future<void> upsert(Magasin? magasin) async{
     String? newMagasinNom;
     String? newMagasinVille;
@@ -77,6 +88,7 @@ class _PageHomeState extends State<PageHome> {
                       Box box = GlobalVars.store!.box<Magasin>();
                       int id = box.put(magasin);
                       print(id);
+                      getAllMagasins();
                       Navigator.pop(context);
                     }
                   },
@@ -87,4 +99,26 @@ class _PageHomeState extends State<PageHome> {
         }
     );
   }
+
+  ///
+  /// Récupération de tous les magasins
+  ///
+
+  void getAllMagasins(){
+    List<Magasin> mags = [];
+    if(GlobalVars.store != null){
+      Box box = GlobalVars.store!.box<Magasin>();
+
+      box.getAll().forEach((mag) {
+        mags.add(mag);
+      });
+
+      setState(() {
+        magasins = mags;
+      });
+    }
+  }
+
+
+
 }
