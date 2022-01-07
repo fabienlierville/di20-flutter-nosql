@@ -1,6 +1,7 @@
 import 'package:courses/global_vars.dart';
 import 'package:courses/models/magasin.dart';
 import 'package:courses/objectbox.g.dart';
+import 'package:courses/pages/page_article_list.dart';
 import 'package:flutter/material.dart';
 
 class PageHome extends StatefulWidget {
@@ -55,6 +56,11 @@ class _PageHomeState extends State<PageHome> {
                 },
                 icon: Icon(Icons.edit),
               ),
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context){
+                  return PageArticleList(magasin: mag);
+                }));
+              },
             );
           }
       ),
