@@ -1,5 +1,6 @@
 import 'package:courses/global_vars.dart';
 import 'package:courses/models/magasin.dart';
+import 'package:courses/objectbox.g.dart';
 import 'package:flutter/material.dart';
 
 class PageHome extends StatefulWidget {
@@ -66,9 +67,17 @@ class _PageHomeState extends State<PageHome> {
               ElevatedButton(
                   onPressed: (){
                     if(newMagasinVille != null && newMagasinNom !=null && GlobalVars.store !=null){
-                      Magasin magasin = Magasin(nom: newMagasinNom!, ville: newMagasinVille!);
+                      if(magasin == null){
+                        magasin = Magasin(nom: newMagasinNom!, ville: newMagasinVille!);
+                      }else{
+                        magasin!.nom = newMagasinNom!;
+                        magasin!.ville = newMagasinVille!;
+                      }
 
-
+                      Box box = GlobalVars.store!.box<Magasin>();
+                      int id = box.put(magasin);
+                      print(id);
+                      Navigator.pop(context);
                     }
                   },
                   child: Text("Valider")
