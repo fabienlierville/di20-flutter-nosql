@@ -4,6 +4,7 @@ import 'package:courses/models/article.dart';
 import 'package:courses/models/article_manager.dart';
 import 'package:courses/models/magasin.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class PageArticleAdd extends StatefulWidget {
   final Magasin magasin;
@@ -17,6 +18,7 @@ class _PageArticleAddState extends State<PageArticleAdd> {
   String? image;
   String? nom;
   double? prix;
+  final ImagePicker picker = ImagePicker();
 
   @override
   Widget build(BuildContext context) {
@@ -84,6 +86,13 @@ class _PageArticleAddState extends State<PageArticleAdd> {
     );
   }
 
-
+  Future<void> getImage(ImageSource source) async{
+    XFile? pickerFile = await picker.pickImage(source: source);
+    if(pickerFile != null){
+      setState(() {
+        image = pickerFile.path;
+      });
+    }
+  }
 
 }
