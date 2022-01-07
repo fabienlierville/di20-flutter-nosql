@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:courses/models/article.dart';
+import 'package:courses/models/article_manager.dart';
 import 'package:courses/models/magasin.dart';
 import 'package:flutter/material.dart';
 
@@ -23,7 +25,15 @@ class _PageArticleAddState extends State<PageArticleAdd> {
         title: Text("Ajouter un article"),
         actions: [
           TextButton(
-              onPressed: null,
+              onPressed: (){
+                if(nom != null && prix !=null && widget.magasin != null){
+                  Article article = Article(nom: nom!, prix: prix!, image: image);
+                  int id = ArticleManager.upsert(article, widget.magasin);
+                  if(id != 0){
+                    Navigator.pop(context);
+                  }
+                }
+              },
               child: Text("Valider", style: TextStyle(color: Colors.white,)),
           )
         ],
@@ -73,4 +83,7 @@ class _PageArticleAddState extends State<PageArticleAdd> {
       ),
     );
   }
+
+
+
 }
