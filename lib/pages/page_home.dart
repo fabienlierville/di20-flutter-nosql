@@ -1,3 +1,4 @@
+import 'package:courses/global_vars.dart';
 import 'package:courses/models/magasin.dart';
 import 'package:flutter/material.dart';
 
@@ -61,6 +62,18 @@ class _PageHomeState extends State<PageHome> {
                 ],
               ),
             ),
+            actions: [
+              ElevatedButton(
+                  onPressed: (){
+                    if(newMagasinVille != null && newMagasinNom !=null && GlobalVars.store !=null){
+                      Magasin magasin = Magasin(nom: newMagasinNom!, ville: newMagasinVille!);
+
+
+                    }
+                  },
+                  child: Text("Valider")
+              )
+            ],
           );
         }
     );
