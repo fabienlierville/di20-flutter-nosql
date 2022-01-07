@@ -1,3 +1,7 @@
+import 'dart:io';
+
+import 'package:courses/models/article.dart';
+import 'package:courses/models/article_manager.dart';
 import 'package:courses/models/magasin.dart';
 import 'package:courses/pages/page_article_add.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +31,44 @@ class _PageArticleListState extends State<PageArticleList> {
           )
         ],
       ),
-      body: Text("taudau"),
+      body: StreamBuilder<List<Article>>(
+        stream: ArticleManager.getAllStream(widget.magasin),
+        builder: (context, snapshot){
+          if(!snapshot.hasData){
+            return Center(child: Text("No Data"),);
+          }else{
+            List<Article>? articles = snapshot.data;
+            if(articles == null || articles.length == 0){
+              return Center(child: Text("No Articles"),);
+            }
+
+            return GridView.builder(
+              itemCount: articles.length,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+                itemBuilder: (context, index){
+                  Article art = articles[index];
+                  return Card(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        //Nom
+                        Text(art.nom),
+                        //Image
+                        Expanded(
+                            child: (art.image == null)
+                                ?Image.asset("assets/img/no_image.png")
+                                :Image.file(File(art.image!))
+                        )
+                        // Prix + Delete
+                      ],
+                    ),
+                  );
+                }
+
+            );
+          }
+        },
+      ),
     );
   }
 }
