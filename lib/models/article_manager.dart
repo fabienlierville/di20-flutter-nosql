@@ -17,4 +17,12 @@ class ArticleManager{
     return controller.stream;
   }
 
+  static int upsert(Article art, Magasin mag){
+    if(GlobalVars.store != null){
+      art.magasin.target = mag;
+      return GlobalVars.store!.box<Article>().put(art);
+    }
+    return 0;
+  }
+
 }
