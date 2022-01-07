@@ -1,3 +1,4 @@
+import 'package:courses/models/magasin.dart';
 import 'package:flutter/material.dart';
 
 class PageHome extends StatefulWidget {
@@ -13,8 +14,36 @@ class _PageHomeState extends State<PageHome> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Liste des magasins"),
+        actions: [
+          TextButton(
+              onPressed: (){
+                upsert(null);
+              },
+              child: Text("Ajouter", style: TextStyle(color: Colors.white),)
+          )
+        ],
       ),
       body: Center(),
+    );
+  }
+
+  Future<void> upsert(Magasin? magasin) async{
+    String? newMagasinNom;
+    String? newMagasinVille;
+
+    showDialog(
+        context: context,
+        builder: (context){
+          return AlertDialog(
+            title: Text("Ajouter/Modifier Magasin"),
+            content: Container(
+              height: MediaQuery.of(context).size.height / 5,
+              child: Column(
+
+              ),
+            ),
+          );
+        }
     );
   }
 }
