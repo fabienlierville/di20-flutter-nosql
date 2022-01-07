@@ -10,6 +10,11 @@ class PageHome extends StatefulWidget {
 class _PageHomeState extends State<PageHome> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Liste des magasins"),
+      ),
+      body: Center(),
+    );
   }
 }
