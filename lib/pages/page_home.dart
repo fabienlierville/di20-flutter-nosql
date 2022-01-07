@@ -33,7 +33,26 @@ class _PageHomeState extends State<PageHome> {
           )
         ],
       ),
-      body: Center(),
+      body: ListView.builder(
+        itemCount: magasins.length,
+          itemBuilder: (context, index){
+            Magasin mag = magasins[index];
+            return ListTile(
+              title: Text(mag.nom),
+              subtitle: Text(mag.ville),
+              trailing: IconButton(
+                onPressed: null,
+                icon: Icon(Icons.delete),
+              ),
+              leading: IconButton(
+                onPressed: (){
+                  upsert(mag);
+                },
+                icon: Icon(Icons.edit),
+              ),
+            );
+          }
+      ),
     );
   }
 
