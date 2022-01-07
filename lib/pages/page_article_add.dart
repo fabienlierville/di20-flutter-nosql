@@ -56,8 +56,8 @@ class _PageArticleAddState extends State<PageArticleAdd> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      IconButton(onPressed: null, icon: Icon(Icons.camera)),
-                      IconButton(onPressed: null, icon: Icon(Icons.photo_library)),
+                      IconButton(onPressed: (){getImage(ImageSource.camera);}, icon: Icon(Icons.camera)),
+                      IconButton(onPressed: (){getImage(ImageSource.gallery);}, icon: Icon(Icons.photo_library)),
                     ],
                   ),
                   TextField(
