@@ -39,7 +39,26 @@ class _PageHomeState extends State<PageHome> {
             content: Container(
               height: MediaQuery.of(context).size.height / 5,
               child: Column(
-
+                children: [
+                  TextField(
+                    controller: TextEditingController(text: magasin?.nom),
+                    onChanged: (String value){
+                      newMagasinNom = value;
+                    },
+                    decoration: InputDecoration(
+                      labelText: "Nom du Magasin"
+                    ),
+                  ),
+                  TextField(
+                    controller: TextEditingController(text: magasin?.ville),
+                    onChanged: (String value){
+                      newMagasinVille = value;
+                    },
+                    decoration: InputDecoration(
+                        labelText: "Ville du Magasin"
+                    ),
+                  ),
+                ],
               ),
             ),
           );
