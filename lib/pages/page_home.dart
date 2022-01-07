@@ -41,7 +41,12 @@ class _PageHomeState extends State<PageHome> {
               title: Text(mag.nom),
               subtitle: Text(mag.ville),
               trailing: IconButton(
-                onPressed: null,
+                onPressed: (){
+                  if(GlobalVars.store != null){
+                    GlobalVars.store!.box<Magasin>().remove(mag.id);
+                    getAllMagasins();
+                  }
+                },
                 icon: Icon(Icons.delete),
               ),
               leading: IconButton(
@@ -60,8 +65,8 @@ class _PageHomeState extends State<PageHome> {
   /// Ajouter / Modifier un magasin
   ///
   Future<void> upsert(Magasin? magasin) async{
-    String? newMagasinNom;
-    String? newMagasinVille;
+    String? newMagasinNom = magasin?.nom ?? null;
+    String? newMagasinVille = magasin?.ville ?? null;
 
     showDialog(
         context: context,
@@ -96,6 +101,7 @@ class _PageHomeState extends State<PageHome> {
             actions: [
               ElevatedButton(
                   onPressed: (){
+
                     if(newMagasinVille != null && newMagasinNom !=null && GlobalVars.store !=null){
                       if(magasin == null){
                         magasin = Magasin(nom: newMagasinNom!, ville: newMagasinVille!);
